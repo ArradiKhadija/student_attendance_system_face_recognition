@@ -1,0 +1,57 @@
+  {% extends 'Modele_enseignant/base_modele.html' %}
+ {% block page_title %}Marquer presence{% endblock page_title %}
+  {% block main_content %}
+<style>
+.center {
+  margin: 0;
+  position: relative;
+  top: 55%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+</style>
+<!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+     <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Marquer presence</h3>
+              </div>
+
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                    <table border="1">
+                     <p><b>Cliquer ECHAP pour mettre fin au processus</b></p>
+                    </table>
+                   </div>
+                    <div class="form-group">
+
+                     Choisir Module:<select class="form-control" name="mod">
+                        {% for mod in module %}
+                         <option value="{{ mod.Module_id}}">{{ mod.NomModule }}</option>
+                        {% endfor %}
+                    </select>
+                        <input type="hidden" name="staff" value="{{user.id}}">
+                  </div>
+                    <div class="form-group">
+                     <br><button type="submit" class=" center btn btn-danger "  id="cf-submit" name="submit">Start</button>
+                   </div>
+                </div>
+
+             </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

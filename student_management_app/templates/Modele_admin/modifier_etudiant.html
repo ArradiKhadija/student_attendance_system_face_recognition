@@ -1,0 +1,86 @@
+{% extends 'Modele_admin/base_modele.html' %}
+{% block page_title %}
+Modifier Etudiant
+{% endblock page_title %}
+{% block main_content %}
+
+<!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+     <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Modifier Etudiant</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/sauvegarder_modifier_etudiant" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                    <label>CodeApogee</label>
+                    <input type="text" class="form-control" placeholder="code" name="CodeApogee" value="{{Etd.CodeApogee}}">
+                  </div>
+                     <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" class="form-control" placeholder="Nom" name="Nom" value="{{Etd.admin_id.last_name}}">
+                  </div>
+                   <div class="form-group">
+                    <label>Prenom</label>
+                    <input type="text" class="form-control" placeholder="Prenom" name="Prenom" value="{{Etd.admin_id.first_name}}">
+                       <input type="hidden"  name="Etd_id" value="{{ Etd.admin_id.id }}">
+                  </div>
+                     <div class="form-group">
+                    <label>Date_naissance</label>
+                    <input type="date" class="form-control" placeholder="Date_naissance" name="Date_naissance" value="{{Etd.Date_naissance}}">
+                  </div>
+                     <div class="form-group">
+                    <label>Genre</label>
+                    <input type="text" class="form-control" placeholder="Date_naissance" name="Genre" value="{{Etd.Genre}}">
+                  </div>
+                    <div class="form-group">
+                    <label>Nom utilisateur</label>
+                    <input type="text" class="form-control" placeholder="nom d'utilisateur " name="username" value="{{Etd.admin_id.username}}">
+                  </div>
+                     <div class="form-group">
+                    <label>email</label>
+                    <input type="email" class="form-control" placeholder="email" name="email" value="{{Etd.admin_id.email}}">
+                  </div>
+                   <div class="form-group">
+                     <label>Adresse</label>
+                     <input type="text" class="form-control" placeholder="Addresse" name="Adresse" value="{{Etd.Adresse}}">
+                  </div>
+                    <div class="form-group">
+                     <label>Photo de profile</label>
+                     <input type="file" class="form-control" placeholder="photos" name="profile" value="{{Etd.profile}}">
+                  </div>
+                      <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Enregistrer Etudiant</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

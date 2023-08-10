@@ -1,0 +1,57 @@
+
+{% extends 'Modele_admin/base_modele.html' %}
+{% block page_title %}
+Gérer_module
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+
+           <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Information Module</h3>
+
+                <div class="card-tools">
+                   <h4>  <a href="/ajouter_module" ><button style="font-size:15px" class="btn btn-success"><i class="fa fa-plus"></i>Ajouter</button></a></h4>
+
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Code Module</th>
+                      <th>Nom Module</th>
+                      <th>Enseignant</th>
+                      <th>Action</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for modules in module %}
+                    <tr>
+                      <td>{{ modules.Module_id }}</td>
+                      <td>{{ modules.NomModule }}</td>
+                      <td>{{ modules.staff_id.first_name }} {{ modules.staff_id.last_name }}</td>
+                       <td><a href="/modifier_module/{{ modules.Module_id }}"><button style="font-size:15px" class="btn btn-info">Modifier <i class="fa fa-edit"></i></button></a></td>
+                      <td><a href="/supprimer_module/{{ modules.Module_id }}"><button style="font-size:15px" class="btn btn-danger">Supprimer<i class="fa fa-remove"></i></button></a></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+     </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+

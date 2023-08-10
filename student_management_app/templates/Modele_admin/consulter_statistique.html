@@ -1,0 +1,41 @@
+{% extends 'Modele_enseignant/enseignant_modele.html' %}
+{% block page_title %}
+{% endblock page_title %}
+{% block main_content %}
+<style>
+.center {
+  margin: 0;
+  position: relative;
+  top: 55%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+</style>
+    <!-- Main content -->
+ <div class="card">
+       <form method="POST" action="#">
+       {% csrf_token %}
+        <div class="card-header">
+           <form method="POST" action="/Consulter_statistique">
+               Session start: <input type="time" name="start">
+               Session End: <input type="time" name="end">
+               Select Date: <input type="date" name="date">
+               Module:<select name="mod">
+                        {% for md in module %}
+                          <option value="{{ md.Module_id}}">{{ md.NomModule }}</option>
+                        {% endfor %}
+                    </select>
+                Enseignant:<select name="ens">
+                        {% for ens in enseignant %}
+                          <option value="{{ ens.id}}">{{ ens.username }}</option>
+                        {% endfor %}
+                    </select>
+<!--       <form method="POST" action="/Consulter_statistique_ens">-->
+            <input type="hidden" class="form-control" id="ens" name="ens" value="{{user.username}} ">
+            <br><br><br><input type="submit"  class="center btn btn-success" value="Visualiser les statistiques">
+           </form>
+        </div>
+       </form>
+ </div>
+{% endblock main_content %}

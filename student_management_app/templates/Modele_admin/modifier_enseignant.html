@@ -1,0 +1,77 @@
+{% extends 'Modele_admin/base_modele.html' %}
+{% block page_title %}
+Modifier Enseignant  |  Code Enseignant : {{ staff.admin_id.id }}
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Modifier Enseignant</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/sauvegarder_modifier_enseignant" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email" value="{{staff.admin_id.email }}">
+                  </div>
+                   <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="Nom" value="{{staff.admin_id.first_name }}">
+                  </div>
+                   <div class="form-group">
+                    <label>Prenom</label>
+                    <input type="text" class="form-control" placeholder="Last Name" name="Prenom" value="{{staff.admin_id.last_name }}">
+                    <input type="hidden"  name="staff_id" value="{{ staff.admin_id.id }}">
+                  </div>
+                   <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" placeholder="Username" name="username" value="{{staff.admin_id.username }}">
+                  </div>
+                  <div class="form-group">
+                    <label>Adresse</label>
+                    <input type="text" class="form-control" placeholder="Addresse" name="Adresse" value="{{staff.Adresse}}">
+                  </div>
+                    <div class="form-group">
+                    <label>Genre</label>
+                    <input type="text" class="form-control" placeholder="Genre" name="Genre" value="{{staff.Genre }}">
+                  </div>
+                      <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Enregistrer Enseignant </button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+

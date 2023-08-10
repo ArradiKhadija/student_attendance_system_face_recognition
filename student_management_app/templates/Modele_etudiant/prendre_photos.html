@@ -1,0 +1,131 @@
+  {% extends 'Modele_etudiant/base_modele.html' %}
+ {% block page_title %}Capture{% endblock page_title %}
+  {% block main_content %}
+<!-- Main content -->
+<style>
+
+.progressbarWrapper {
+  height: 30px;
+  width: 500px;
+  max-width: 80%;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  position: relative;
+  background: #555;
+  padding: 3px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+#greenBar {
+  display: block;
+  height: 100%;
+  width: 0px;
+  background-color: rgb(43, 194, 83);
+  background-image: linear-gradient(
+    center bottom,
+    rgb(43, 194, 83) 37%,
+    rgb(84, 240, 84) 69%
+  );
+  position: relative;
+  overflow: hidden;
+  font-size: 15px;
+  text-align: center;
+  color: white;
+  transition: all 8ms ease;
+}
+
+button {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  border: none;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.center {
+  margin: 0;
+  position: relative;
+  top: 55%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+button:active {
+  width: 58px;
+  height: 28px;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+    <section class="content">
+      <div class="container-fluid">
+     <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Prendre photos</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/prendre_photos" method="post">
+                  {% csrf_token %}
+
+                   <div class="form-group">
+                        <input type="hidden" name="staff" value="{{user.id}}">
+                   </div>
+
+                     <div class="form-group ">
+<!--                        <div class="center ">-->
+                          <img src="media/gif.gif" class="img">
+                            <div class="progressbarWrapper">
+                                <span id="greenBar"></span>
+                            </div>
+                     </div>
+                     <br><button type="submit" class="btn btn-danger center" onclick="move()" id="cf-submit" name="submit">Start</button>
+
+
+
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          </div>
+      </div>
+    </section>
+    <script>
+   function move() {
+
+  let elem = document.getElementById("greenBar");
+  let stepValue = 0;
+  let id = setInterval(frame, 500);
+
+  function frame() {
+
+    if (stepValue >= 100) {
+      clearInterval(id);
+
+    } else {
+      elem.style.width = (stepValue + 1) + "%";
+      elem.innerHTML = (stepValue + 1) + "%";
+      stepValue=(stepValue + 1);
+    }
+  }
+}
+</script>
+
+{% endblock main_content %}
+
+<!--                    <label>Nom Complet</label>-->
+<!--                    <select class="form-control" name="staff">-->
+<!--                        {% for staff in etudiant %}-->
+<!--                          <option value="{{ staff.id}}">{{ staff.username }}</option>-->
+<!--                        {% endfor %}-->
+<!--                    </select>-->

@@ -1,0 +1,59 @@
+{% csrf_token %}value="{{student.Genre}}"
+                 <div class="form-group">
+                    <label>CodeApogee</label>
+                    <input type="text" class="form-control" placeholder="code" name="CodeApogee" value="{{student.CodeApogee}}">
+                  </div>
+                     <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" class="form-control" placeholder="Nom" name="Nom" value="{{student.admin_id.last_name}}">
+                  </div>
+                   <div class="form-group">
+                    <label>Prenom</label>
+                    <input type="text" class="form-control" placeholder="Prenom" name="Prenom" value="{{student.admin_id.first_name}}">
+                  </div>
+                     <div class="form-group">
+                    <label>Date_naissance</label>
+                    <input type="date" class="form-control" placeholder="Date_naissance" name="Date_naissance" value="{{student.Date_naissance}}">
+                  </div>
+                     <div class="form-group">
+                         <label for="Genre">Genre:</label>
+                         <br>
+                        <select id="Genre" name="Genre" >
+                            <option >Masculin</option>
+                            <option value="{{student.Genre}}">Feminin</option>
+                             </select>
+                  </div>
+                    <div class="form-group">
+                    <label>Nom utilisateur</label>
+                    <input type="text" class="form-control" placeholder="nom d'utilisateur " name="username" value="{{student.admin_id.username}}">
+                  </div>
+                     <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" placeholder="email" name="email" value="{{student.admin_id.email}}">
+                  </div>
+                  <div class="form-group">
+                    <label>Adresse</label>
+                    <input type="text" class="form-control" placeholder="Addresse" name="Adresse" value="{{student.Adresse}}">
+                  </div>
+                    <div class="form-group">
+                     <label>Photo de profile</label>
+                     <input type="file" class="form-control" placeholder="photos" name="photo" value="{{student.admin_id.photo}}">
+                  </div>
+                      <div class="form-group" >
+                          {% if messages %}
+                             {% for message in messages %}
+                               {% if message.tags == 'success' %}
+                                 <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                               {% endif %}
+                               {% if message.tags == 'error' %}
+                                 <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                                {% endif %}
+                             {% endfor %}
+                          {% endif %}
+                       </div>
+                   </div>
+                <!-- /.card-body -->
+
+                 <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Enregistrer modification</button>
+                 </div>

@@ -1,0 +1,65 @@
+{% extends 'Modele_admin/base_modele.html' %}
+{% block page_title %}
+Edit Course |  Course ID : {{ modules.Module_id }}
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Modifier Module</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/sauvegarder_modifier_module" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Nom Module</label>
+                    <input type="text" class="form-control" name="NomModule" placeholder="Entrer module" value="{{ modules.NomModule }}">
+                  </div>
+                  <div class="form-group">
+                    <label>Enseignant</label>
+                    <select class="form-control" name="staff">
+                        {% for staff in enseignant %}
+                          <option value="{{ staff.id}}"{% if staff.id == modules.staff_id.id %} selected {% endif %} >{{ staff.first_name }} {{ staff.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                    <input type="hidden"  name="Module_id"  value="{{ modules.Module_id }}">
+                   <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Enregistrer Module</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+

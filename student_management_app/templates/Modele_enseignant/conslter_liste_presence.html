@@ -1,0 +1,57 @@
+{% extends 'Modele_enseignant/enseignant_modele.html' %}
+{% block page_title %}
+Liste de présence des étudiants:
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+         <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <form method="POST" action="#">
+                  {% csrf_token %}
+              <div class="card-header">
+                  <form method="POST" action="/consulter_liste_presence">
+                  Session start: <input type="time" name="start">
+                  Session End: <input type="time" name="end">
+                  Select Date: <input type="date" name="date">
+                  Module:<select name="mod">
+                        {% for md in module %}
+                          <option value="{{ md.Module_id}}">{{ md.NomModule }}</option>
+                        {% endfor %}
+                    </select>
+                  <input type="hidden" class="form-control" name="ens" value="{{user.username}} ">
+                  <!--<a href="/consulter_liste_presence"><input type="submit" value="submit"></a>-->
+                   <input type="submit" value="submit">
+                  </form>
+              <!-- /.card-header -->
+
+                  <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Code Apogee</th>
+                      <th>Nom</th>
+                      <th>Prenom</th>
+                      <th>Photo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for staff in pr %}
+                    <tr>
+                      <td>{{ staff.CodeE}}</td>
+                      <td>{{ staff.Nom}}</td>
+                      <td>{{ staff.Prenom}}</td>
+                       <td><img src="{{ staff.Photo }}" style="width:100px"/></td>
+                   </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+     </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

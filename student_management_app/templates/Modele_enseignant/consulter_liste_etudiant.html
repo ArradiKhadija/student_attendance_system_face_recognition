@@ -1,0 +1,50 @@
+{% extends 'Modele_enseignant/enseignant_modele.html' %}
+{% block page_title %}
+SMI S6:<br>
+Option  :Base De Données
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+
+           <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Liste :</h3>
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Code Apogee</th>
+                      <th>Nom</th>
+                      <th>Prenom</th>
+                      <th>Photo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for Etd in Etud %}
+                    <tr>
+                      <td>{{ Etd.CodeApogee }}</td>
+                      <td>{{ Etd.admin_id.last_name }}</td>
+                      <td>{{ Etd.admin_id.first_name}}</td>
+                       <td><img src="{{ Etd.profile }}" style="width:100px"/></td>
+                   </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+     </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
